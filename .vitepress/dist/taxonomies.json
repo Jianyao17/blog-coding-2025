@@ -1,0 +1,426 @@
+{
+  "series": {
+    "Tutorial Web": [
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/wallpaperflarecom_wallpaper.jpg",
+        "link": "/markdown-examples"
+      },
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/en/wallpaperflarecom_wallpaper.jpg",
+        "link": "/en/markdown-examples"
+      }
+    ],
+    "Tutorial Unity": [
+      {
+        "lang": "id-ID",
+        "createdAt": "2025-01-13T00:00:00.000Z",
+        "lastUpdated": "2025-01-15T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Unity",
+        "tags": [
+          "unity",
+          "game dev",
+          "c#",
+          "shader"
+        ],
+        "thumbnail": "/unity/tutorial/star-rail-kuru.gif",
+        "link": "/unity/tutorial/index.id"
+      }
+    ],
+    "Tutorial JavaScript": [
+      {
+        "lang": "in-ID",
+        "createdAt": "2025-01-28T00:00:00.000Z",
+        "lastUpdated": "2025-01-28T00:00:00.000Z",
+        "title": "JavaScript 101",
+        "description": "Tutorial JavaScript Pemula",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial JavaScript",
+        "tags": [
+          "web dev",
+          "javascript",
+          "node.js"
+        ],
+        "thumbnail": null,
+        "link": "/website/javasrcript/index"
+      }
+    ]
+  },
+  "tags": {
+    "web development": [
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/wallpaperflarecom_wallpaper.jpg",
+        "link": "/markdown-examples"
+      },
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/wallpaperflarecom_wallpaper.jpg",
+        "link": "/markdown-examples"
+      },
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/en/wallpaperflarecom_wallpaper.jpg",
+        "link": "/en/markdown-examples"
+      },
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/en/wallpaperflarecom_wallpaper.jpg",
+        "link": "/en/markdown-examples"
+      }
+    ],
+    "vue": [
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/wallpaperflarecom_wallpaper.jpg",
+        "link": "/markdown-examples"
+      },
+      {
+        "lang": "id",
+        "createdAt": "2022-11-24T00:00:00.000Z",
+        "lastUpdated": "2022-12-01T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": null,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Web",
+        "tags": [
+          "web development",
+          "web development",
+          "vue"
+        ],
+        "thumbnail": "/en/wallpaperflarecom_wallpaper.jpg",
+        "link": "/en/markdown-examples"
+      }
+    ],
+    "unity": [
+      {
+        "lang": "id-ID",
+        "createdAt": "2025-01-13T00:00:00.000Z",
+        "lastUpdated": "2025-01-15T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Unity",
+        "tags": [
+          "unity",
+          "game dev",
+          "c#",
+          "shader"
+        ],
+        "thumbnail": "/unity/tutorial/star-rail-kuru.gif",
+        "link": "/unity/tutorial/index.id"
+      }
+    ],
+    "game dev": [
+      {
+        "lang": "id-ID",
+        "createdAt": "2025-01-13T00:00:00.000Z",
+        "lastUpdated": "2025-01-15T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Unity",
+        "tags": [
+          "unity",
+          "game dev",
+          "c#",
+          "shader"
+        ],
+        "thumbnail": "/unity/tutorial/star-rail-kuru.gif",
+        "link": "/unity/tutorial/index.id"
+      }
+    ],
+    "c#": [
+      {
+        "lang": "id-ID",
+        "createdAt": "2025-01-13T00:00:00.000Z",
+        "lastUpdated": "2025-01-15T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Unity",
+        "tags": [
+          "unity",
+          "game dev",
+          "c#",
+          "shader"
+        ],
+        "thumbnail": "/unity/tutorial/star-rail-kuru.gif",
+        "link": "/unity/tutorial/index.id"
+      }
+    ],
+    "shader": [
+      {
+        "lang": "id-ID",
+        "createdAt": "2025-01-13T00:00:00.000Z",
+        "lastUpdated": "2025-01-15T00:00:00.000Z",
+        "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
+        "description": "Ini Cuma Deskripsi",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial Unity",
+        "tags": [
+          "unity",
+          "game dev",
+          "c#",
+          "shader"
+        ],
+        "thumbnail": "/unity/tutorial/star-rail-kuru.gif",
+        "link": "/unity/tutorial/index.id"
+      }
+    ],
+    "web dev": [
+      {
+        "lang": "in-ID",
+        "createdAt": "2025-01-28T00:00:00.000Z",
+        "lastUpdated": "2025-01-28T00:00:00.000Z",
+        "title": "JavaScript 101",
+        "description": "Tutorial JavaScript Pemula",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial JavaScript",
+        "tags": [
+          "web dev",
+          "javascript",
+          "node.js"
+        ],
+        "thumbnail": null,
+        "link": "/website/javasrcript/index"
+      }
+    ],
+    "javascript": [
+      {
+        "lang": "in-ID",
+        "createdAt": "2025-01-28T00:00:00.000Z",
+        "lastUpdated": "2025-01-28T00:00:00.000Z",
+        "title": "JavaScript 101",
+        "description": "Tutorial JavaScript Pemula",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial JavaScript",
+        "tags": [
+          "web dev",
+          "javascript",
+          "node.js"
+        ],
+        "thumbnail": null,
+        "link": "/website/javasrcript/index"
+      }
+    ],
+    "node.js": [
+      {
+        "lang": "in-ID",
+        "createdAt": "2025-01-28T00:00:00.000Z",
+        "lastUpdated": "2025-01-28T00:00:00.000Z",
+        "title": "JavaScript 101",
+        "description": "Tutorial JavaScript Pemula",
+        "readTime": 5,
+        "author": [
+          {
+            "name": "Jianyao17",
+            "avatar": "/Jianyao17.png",
+            "link": "https://github.com/Jianyao17"
+          }
+        ],
+        "series": "Tutorial JavaScript",
+        "tags": [
+          "web dev",
+          "javascript",
+          "node.js"
+        ],
+        "thumbnail": null,
+        "link": "/website/javasrcript/index"
+      }
+    ]
+  }
+}
