@@ -4,6 +4,7 @@
 .temp
 .vite_opt_cache
 .vitepress/cache
+.vitepress/dist
 .vscode
 .idea
 temp
