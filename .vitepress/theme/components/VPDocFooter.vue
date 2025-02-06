@@ -2,14 +2,14 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress/dist/client/theme-default/composables/data'
 import { useEditLink } from 'vitepress/dist/client/theme-default/composables/edit-link'
-import { usePrevNext } from 'vitepress/dist/client/theme-default/composables/prev-next'
+import { usePrevNext } from '../composables/usePreviousNext'
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue'
 import VPDateTime from './VPDateTime.vue'
 
 const { theme, page, frontmatter } = useData()
 
 const editLink = useEditLink()
-const control = usePrevNext()
+const { prev, next } = usePrevNext()
 
 const hasEditLink = computed(
   () => theme.value.editLink && frontmatter.value.editLink !== false
@@ -21,8 +21,8 @@ const showFooter = computed(
     hasEditLink.value ||
     hasCreatedAt.value ||
     hasLastUpdated.value ||
-    control.value.prev ||
-    control.value.next
+    prev.value ||
+    next.value
 )
 </script>
 
@@ -45,7 +45,7 @@ const showFooter = computed(
     </div>
 
     <nav
-      v-if="control.prev?.link || control.next?.link"
+      v-if="prev?.link || next?.link"
       class="prev-next"
       aria-labelledby="doc-footer-aria-label"
     >
@@ -53,28 +53,28 @@ const showFooter = computed(
 
       <div class="pager">
         <VPLink
-          v-if="control.prev?.link"
+          v-if="prev?.link"
           class="pager-link prev"
-          :href="control.prev.link"
+          :href="prev.link"
         >
           <span
             class="desc"
             v-html="theme.docFooter?.prev || 'Previous page'"
           ></span>
-          <span class="title" v-html="control.prev.text"></span>
+          <span class="title" v-html="prev.text"></span>
         </VPLink>
       </div>
       <div class="pager">
         <VPLink
-          v-if="control.next?.link"
+          v-if="next?.link"
           class="pager-link next"
-          :href="control.next.link"
+          :href="next.link"
         >
           <span
             class="desc"
             v-html="theme.docFooter?.next || 'Next page'"
           ></span>
-          <span class="title" v-html="control.next.text"></span>
+          <span class="title" v-html="next.text"></span>
         </VPLink>
       </div>
     </nav>
