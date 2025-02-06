@@ -49,7 +49,8 @@ const items = computed(() => findCaseInsensitive(collection.value, props.content
 
 const articles = computed(() => 
   Object.entries(items.value)
-        .map(([index, items]) => ({ index, ...items, })))
+        .map(([index, ref]) => taxonomies.value?.items[ref]))
+
 
 const searchInput = ref('')
 const hasOrder = computed(() => articles.value.every(article => 'order' in article))

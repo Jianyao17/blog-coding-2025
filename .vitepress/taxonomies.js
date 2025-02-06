@@ -38,7 +38,7 @@ function GetListFrontmatterData()
 
 function CreateTaxonomiesData(rawData)
 {
-  const taxonomies = { series: {}, tags: {} }   
+  const taxonomies = { series: {}, tags: {}, items: {} }   
   console.log('');
   
   rawData 
@@ -46,9 +46,9 @@ function CreateTaxonomiesData(rawData)
     .forEach(({ relativePath, frontmatter }) => 
     {              
       // Generate URL path & Generate thumbnail path
-      const linkUrl = pathToSlug(relativePath.replace(/\.md$/, ''))
+      const linkUrl = '/' + pathToSlug(relativePath.replace(/\.md$/, ''))
       const imgPath = frontmatter.thumbnail 
-              ? pathToSlug(path.join(path.dirname(relativePath), frontmatter.thumbnail))
+              ? '/' + pathToSlug(path.join(path.dirname(relativePath), frontmatter.thumbnail))
               : null
 
       const metadata = 
@@ -63,24 +63,30 @@ function CreateTaxonomiesData(rawData)
         author: frontmatter.author || null,
         
         series: frontmatter.series || null,
+        order: frontmatter.order || null,
         tags: frontmatter.tags || null,
-        thumbnail: imgPath ? `/${imgPath}` : null,
-        link: linkUrl ? `/${linkUrl}` : null
+        thumbnail: imgPath,
+        link: linkUrl
       }
 
+      // Add article to taxonomies index
+      taxonomies.items[linkUrl] = metadata
+
+      // Add article to series
       if (frontmatter.series) 
       {
         if (!taxonomies.series[frontmatter.series]) taxonomies.series[frontmatter.series] = [];
-        taxonomies.series[frontmatter.series].push(metadata);
+        taxonomies.series[frontmatter.series].push(linkUrl);
   
         console.log(`Added to Series [${frontmatter.series}]: ${relativePath}`);
       }
   
+      // Add article to tags
       if (frontmatter.tags) 
       {
         frontmatter.tags.forEach((tag) => {
           if (!taxonomies.tags[tag]) taxonomies.tags[tag] = [];
-          taxonomies.tags[tag].push(metadata);
+          taxonomies.tags[tag].push(linkUrl);
           console.log(`Added to Tag [${tag}]: ${relativePath}`);
         });
       }
