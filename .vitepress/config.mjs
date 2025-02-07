@@ -86,8 +86,8 @@ export default defineConfig({
   // ============ Scripts Runner ============
   async buildEnd() 
   {
-    GenerateRobotsTxt();
     CopyAssetsToBuild();
+    GenerateRobotsTxt(BASE_URL);
     GenerateTaxonomiesJSON();
     TransoformImages();
   },
