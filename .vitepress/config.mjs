@@ -13,6 +13,7 @@ export default defineConfig({
   title: SITE_NAME,
   description: "A Coding Blog Site",
   srcDir: './blog',
+  lang: 'id',
 
   sitemap: {
     hostname: BASE_URL

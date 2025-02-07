@@ -6,22 +6,23 @@ export function InsertOGMetadata(pageData, context)
 
   // Generate canonical URL
   const pagePath = pageData.relativePath
-  const sitename = context.siteConfig.site.title
-  const title = createTitle(context.siteConfig.site, pageData)
+  const siteData = context.siteConfig.site
+  
+  const title = createTitle(siteData, pageData)
   const hostname = context.siteConfig.sitemap.hostname
   const pageUrl = new URL(pagePath, hostname).href
-  const currentLocale = context.siteConfig.site.localeIndex
 
-  const head = GenerateSocialMeta(pageData.frontmatter, pageUrl, sitename, title, currentLocale)
+  const head = GenerateSocialMeta(pageData.frontmatter, pageUrl, title, siteData)
   pageData.frontmatter.head ??= [];
   pageData.frontmatter.head.push(...head);
 }
 
 
-export function GenerateSocialMeta(frontmatter, pageUrl, siteName, title, locale) 
+export function GenerateSocialMeta(frontmatter, pageUrl, title, siteData) 
 {
   const meta = [];
   const {
+    lang,
     description,
     thumbnail,
     author,
@@ -35,8 +36,8 @@ export function GenerateSocialMeta(frontmatter, pageUrl, siteName, title, locale
   meta.push(['meta', { property: 'og:title', content: title }])
   meta.push(['meta', { property: 'og:description', content: description }])
   meta.push(['meta', { property: 'og:url', content: pageUrl }])
-  meta.push(['meta', { property: 'og:site_name', content: siteName }])
-  meta.push(['meta', { property: 'og:locale', content: locale === 'root' ? 'en' : locale }])
+  meta.push(['meta', { property: 'og:site_name', content: siteData.title }])  
+  meta.push(['meta', { property: 'og:locale', content: lang }])
 
   // Article metadata
   if (createdAt) {
