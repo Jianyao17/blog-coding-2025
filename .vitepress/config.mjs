@@ -3,13 +3,20 @@ import { transoformImages } from './img-processing.js';
 import { GenerateTaxonomiesJSON } from './taxonomies.js';
 import { TaxonomiesHotUpdate } from './taxonomies.dev.js';
 import { copyAssetsToBuild } from './copy-assets.js';
+import { InsertOGMetadata } from './og-metadata.js';
 
+const BASE_URL = 'https://blog.jianyao17.com'; 
+const SITE_NAME = "Blog Coding";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Blog Coding",
+  title: SITE_NAME,
   description: "A Coding Blog Site",
   srcDir: './blog',
+
+  sitemap: {
+    hostname: BASE_URL
+  },
   
   // ============ Vitepress Theme ============
   themeConfig: 
@@ -80,6 +87,10 @@ export default defineConfig({
     copyAssetsToBuild();
     GenerateTaxonomiesJSON();
     transoformImages();
+  },
+
+  transformPageData(pageData, ctx) {
+    InsertOGMetadata(pageData, ctx)
   },
 
   vite: {
