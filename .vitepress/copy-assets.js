@@ -10,7 +10,7 @@ const isExcludeFolder = (path) =>
   appConfig.excludeFolder.some(stirng => path.includes(stirng))
 
 
-export function copyAssetsToBuild() 
+export function CopyAssetsToBuild() 
 {
   const items = readdirSync(blogDir, { withFileTypes: true, recursive: true })
   for (const item of items)

@@ -33,7 +33,7 @@ function getImages(dir)
 
 
 // Main Function
-export function transoformImages() 
+export function TransoformImages() 
 {
   const images = getImages(imgConfig.inputDir)
   for (const img of images)

@@ -1,8 +1,9 @@
 import { defineConfig } from 'vitepress'
-import { transoformImages } from './img-processing.js';
+import { TransoformImages } from './img-processing.js';
 import { GenerateTaxonomiesJSON } from './taxonomies.js';
 import { TaxonomiesHotUpdate } from './taxonomies.dev.js';
-import { copyAssetsToBuild } from './copy-assets.js';
+import { GenerateRobotsTxt } from './generate-robots.js';
+import { CopyAssetsToBuild } from './copy-assets.js';
 import { InsertOGMetadata } from './og-metadata.js';
 
 const BASE_URL = 'https://blog.jianyao17.com'; 
@@ -85,9 +86,10 @@ export default defineConfig({
   // ============ Scripts Runner ============
   async buildEnd() 
   {
-    copyAssetsToBuild();
+    GenerateRobotsTxt();
+    CopyAssetsToBuild();
     GenerateTaxonomiesJSON();
-    transoformImages();
+    TransoformImages();
   },
 
   transformPageData(pageData, ctx) {
