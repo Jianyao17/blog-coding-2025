@@ -76,7 +76,7 @@ const formattedDate = computed(() => datetime.value);
   border: 1px solid var(--vp-custom-block-info-border);
   color: var(--vp-c-text-1);
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--vp-shadow-3);
   border-radius: 6px;
   padding: 6px 16px;
 
