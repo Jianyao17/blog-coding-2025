@@ -5,6 +5,8 @@ import { useEditLink } from 'vitepress/dist/client/theme-default/composables/edi
 import { usePrevNext } from '../composables/usePreviousNext'
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue'
 import VPDateTime from './VPDateTime.vue'
+import VPGiscus from './VPGiscus.vue'
+import VPAds from './VPAds.vue'
 
 const { theme, page, frontmatter } = useData()
 
@@ -78,6 +80,21 @@ const showFooter = computed(
         </VPLink>
       </div>
     </nav>
+    
+    <div class="ads-container">
+      <VPAds orientation="horizontal"/>
+    </div>
+
+    <div class="comments-container" id="comments">
+      <h1 class="comments-header">
+        <span class="comments-icon"></span>
+        <span>Comments</span>
+      </h1>
+      <div class="comments-content">
+        <VPGiscus />
+      </div>
+    </div>
+
   </footer>
 </template>
 
@@ -104,6 +121,10 @@ const showFooter = computed(
 
 .edit-info {
   padding-bottom: 18px;
+}
+
+.edit-link {
+  margin-bottom: 16px;
 }
 
 @media (min-width: 640px) {
@@ -136,7 +157,7 @@ const showFooter = computed(
 
 .prev-next {
   border-top: 1px solid var(--vp-c-divider);
-  padding-top: 24px;
+  padding: 24px 0;
   display: grid;
   grid-row-gap: 8px;
 }
@@ -182,5 +203,43 @@ const showFooter = computed(
   font-weight: 500;
   color: var(--vp-c-brand-1);
   transition: color 0.25s;
+}
+
+.ads-container {
+  height: 144px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 640px) {
+  .ads-container {
+    height: 120px;
+  }
+}
+
+
+.comments-header {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 32px;
+
+  border-bottom: 1px solid var(--vp-c-divider);
+  padding-bottom: 16px;
+}
+
+.comments-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+
+  background-color: var(--vp-c-text-1);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16'%3E%3Cpath d='M1.75 1h8.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 10.25 10H7.061l-2.574 2.573A1.458 1.458 0 0 1 2 11.543V10h-.25A1.75 1.75 0 0 1 0 8.25v-5.5C0 1.784.784 1 1.75 1ZM1.5 2.75v5.5c0 .138.112.25.25.25h1a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h3.5a.25.25 0 0 0 .25-.25v-5.5a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13 2a.25.25 0 0 0-.25-.25h-.5a.75.75 0 0 1 0-1.5h.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0 1 14.25 12H14v1.543a1.458 1.458 0 0 1-2.487 1.03L9.22 12.28a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l2.22 2.22v-2.19a.75.75 0 0 1 .75-.75h1a.25.25 0 0 0 .25-.25Z'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-size: contain;
 }
 </style>
