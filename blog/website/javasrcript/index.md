@@ -5,7 +5,7 @@ lastUpdated: 2025-01-28
 title: 'JavaScript 101'
 description: "Tutorial JavaScript Pemula"
 readTime: 5 # Minutes
-series: Tutorial JavaScript
+series: Website
 order: 1
 author:
   - name: Jianyao17

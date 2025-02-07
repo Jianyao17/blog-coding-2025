@@ -5,7 +5,7 @@ lastUpdated: 2025-01-15
 title: 'Roadmap Belajar Unity 2025 Bahasa Indonesia'
 description: "Ini Cuma Deskripsi"
 thumbnail: star-rail-kuru.gif
-readTime: 5 # Minutes
+readTime: 6 # Minutes
 series: Tutorial Unity
 order: 1
 author:
