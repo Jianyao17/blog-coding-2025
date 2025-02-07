@@ -57,12 +57,6 @@ useActiveAnchor(container, marker)
 
 .VPDocAsideOutline.has-outline {
   display: block;
-  mask-image: linear-gradient(
-    to bottom,
-    var(--vp-c-bg) 5%,
-    var(--vp-c-bg) 95%,
-    transparent 100%
-  );
 }
 
 .content {
@@ -76,6 +70,13 @@ useActiveAnchor(container, marker)
   overflow-y: auto;  
   scrollbar-width: thin;
   scrollbar-color: var(--vp-c-divider) transparent;
+
+  mask-image: linear-gradient(
+    to bottom,
+    var(--vp-c-bg) 5%,
+    var(--vp-c-bg) 95%,
+    transparent 100%
+  );
 }
 
 .content::-webkit-scrollbar-track {
