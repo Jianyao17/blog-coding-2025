@@ -1,21 +1,11 @@
 import { useTaxonomies } from './useTaxonomies'
-import { useData } from 'vitepress'
+import { useRoute } from 'vitepress'
 import { computed } from 'vue'
 
 export function usePrevNext() 
 {
-  const { page } = useData()
   const { taxonomies } = useTaxonomies()
-  
-  const normalizeUrl = url => 
-  {
-    return url.toLowerCase()
-      .replace(/^\//, '') // Hapus leading slash
-      .replace(/(^|\/)index$/, '')
-      .replace(/\.md$/, '')
-      .replace(/\/$/, '')
-      .trim()
-  }
+  const route = useRoute()
 
   function baseDir(url) 
   {
@@ -38,15 +28,13 @@ export function usePrevNext()
     // Jika taxonomies belum ada, kembalikan array kosong.
     if (!taxonomies.value || !taxonomies.value.items) return []
 
-    const parrentDir = baseDir(page.value.relativePath)
-    const relativePath = normalizeUrl(page.value.relativePath)
-    
     // Ambil semua halaman dan buat salinan untuk diurutkan
+    const parrentDir = baseDir(route.path)
     const pages = computed(() => 
     {      
       return Object.entries(taxonomies.value.items)
                    .filter(([, article]) => baseDir(article.link) === parrentDir)
-                   .map(([id, article]) => article)
+                   .map(([, article]) => article)
     })             
     
     return pages.value.sort((a, b) => 
@@ -66,10 +54,8 @@ export function usePrevNext()
   })
 
   const currentIndex = computed(() => 
-  {    
-    return sortedPages.value.findIndex(p => 
-      normalizeUrl(p.link) === normalizeUrl(page.value.relativePath))
-  })
+    sortedPages.value.findIndex(p => p.link === route.path))
+
 
   const prev = computed(() => {        
     if (currentIndex.value > 0) {

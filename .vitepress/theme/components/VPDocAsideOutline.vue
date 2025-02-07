@@ -20,13 +20,6 @@ onContentUpdated(() => {
 
 const marker = ref()
 const container = ref()
-const overflowFade = computed(() => 
-{
-  const content = document.querySelector('.content');
-  console.log(content);
-  
-  return content?.scrollHeight > content?.clientHeight ? true : false
-})
 
 useActiveAnchor(container, marker)
 </script>
