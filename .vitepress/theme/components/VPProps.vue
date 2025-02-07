@@ -21,7 +21,7 @@ const TagUrl = (tag) =>
          :href="TagUrl(tag)">{{ tag }}</a>
     </div>
     <div class="container">
-      <VPDateTime :date="frontmatter.lastUpdated" label="Updated"/> ∙ 
+      <VPDateTime :date="frontmatter.lastUpdated" toolTip="Last Updated"/> ∙ 
       <VPAuthor />
     </div>
   </div>
