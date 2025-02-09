@@ -55,5 +55,23 @@ export default
       'useMap',
       'isMap', 
     ]
-  }
+  },
+
+  giscus: {
+    lang: "en", // UI language
+    themes: {
+      dark: "transparent_dark",
+      light: "light"
+    },
+
+    repo: "username/repository", 
+    repoId: "YOUR_REPO_ID", 
+    category: "General", 
+    categoryId: "YOUR_CATEGORY_ID", 
+
+    mapping: "pathname",
+    inputPosition: "top",
+    reactionsEnabled: "1",
+    emitMetadata: "0",
+  },
 }
