@@ -5,14 +5,19 @@ import { TaxonomiesHotUpdate } from './taxonomies.dev.js';
 import { GenerateRobotsTxt } from './generate-robots.js';
 import { CopyAssetsToBuild } from './copy-assets.js';
 import { InsertOGMetadata } from './og-metadata.js';
+import { configDotenv } from 'dotenv';
 
-const BASE_URL = 'https://blog.jianyao17.com'; 
-const SITE_NAME = "Blog Coding";
+// Load .env file
+configDotenv()
+
+const SITE_NAME = process.env.VITE_SITE_NAME
+const SITE_DESC = process.env.VITE_SITE_DESCRIPTION
+const BASE_URL =  process.env.VITE_SITE_URL
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: SITE_NAME,
-  description: "A Coding Blog Site",
+  description: SITE_DESC,
   srcDir: './blog',
   lang: 'id',
 
