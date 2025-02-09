@@ -24,7 +24,7 @@ const breadcrumbs = computed(() => {
     accumulatedPath += `/${cleanPart}`
     crumbs.push({
       title: formatTitle(cleanPart),
-      link: localeUrl(accumulatedPath)
+      link: localeUrl(accumulatedPath) + '/'
     })
   }
 
