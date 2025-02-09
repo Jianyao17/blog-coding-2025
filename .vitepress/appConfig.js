@@ -74,4 +74,9 @@ export default
     reactionsEnabled: "1",
     emitMetadata: "0",
   },
+
+  googleAds: {
+    clientId: 'YOUR_GOOGLE_ADS_CLIENT_ID', 
+    adSlot: 'YOUR_GOOGLE_ADS_SLOT',        
+  }
 }
