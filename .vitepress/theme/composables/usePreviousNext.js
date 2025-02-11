@@ -7,6 +7,16 @@ export function usePrevNext()
   const { taxonomies } = useTaxonomies()
   const route = useRoute()
 
+  const normalizeUrl = url => 
+  {
+    return url.toLowerCase()
+      .replace(/^\//, '') // Hapus leading slash
+      .replace(/(^|\/)index$/, '')
+      .replace(/\.md$/, '')
+      .replace(/\/$/, '')
+      .trim()
+  }
+
   function baseDir(url) 
   {
     if (!url) return ''
@@ -29,14 +39,14 @@ export function usePrevNext()
     if (!taxonomies.value || !taxonomies.value.items) return []
 
     // Ambil semua halaman dan buat salinan untuk diurutkan
-    const parrentDir = baseDir(route.path)
+    const parrentDir = baseDir(route.path)    
     const pages = computed(() => 
     {      
       return Object.entries(taxonomies.value.items)
                    .filter(([, article]) => baseDir(article.link) === parrentDir)
                    .map(([, article]) => article)
-    })             
-    
+    })    
+
     return pages.value.sort((a, b) => 
     {
       // Ambil nilai order dari frontmatter atau default ke Infinity
@@ -54,10 +64,11 @@ export function usePrevNext()
   })
 
   const currentIndex = computed(() => 
-    sortedPages.value.findIndex(p => p.link === route.path))
+    sortedPages.value.findIndex(p => 
+      normalizeUrl(p.link) === normalizeUrl(route.path)))
 
 
-  const prev = computed(() => {        
+  const prev = computed(() => {            
     if (currentIndex.value > 0) {
       const prevPage = sortedPages.value[currentIndex.value - 1]
       return {
