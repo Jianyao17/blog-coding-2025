@@ -64,11 +64,6 @@ export default
       light: "light"
     },
 
-    repo: "username/repository", 
-    repoId: "YOUR_REPO_ID", 
-    category: "General", 
-    categoryId: "YOUR_CATEGORY_ID", 
-
     mapping: "pathname",
     inputPosition: "top",
     reactionsEnabled: "1",
