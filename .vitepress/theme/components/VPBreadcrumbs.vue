@@ -3,7 +3,7 @@ import { useLocalizationUrl } from '../composables/useLocalizationUrl'
 import { useData, useRoute } from 'vitepress'
 import { computed } from 'vue'
 
-const { site, localeIndex } = useData()
+const { localeIndex } = useData()
 const { localeUrl } = useLocalizationUrl()
 const route = useRoute()
 
@@ -19,18 +19,21 @@ const breadcrumbs = computed(() => {
     ||  part.includes(localeIndex.value)) continue
 
     // Hapus ekstensi .html atau .md dari bagian path
-    const cleanPart = part.replace(/\.(html|md)$/, '')
+    const cleanLink = part.replace(/\.(html|md)$/, '')
 
-    accumulatedPath += `/${cleanPart}`
+    // Hapus angka di awal untuk judul
+    const cleanTitle = cleanLink.replace(/^\d+-/, '')
+
+    accumulatedPath += `/${cleanLink}`
     crumbs.push({
-      title: formatTitle(cleanPart),
+      title: formatTitle(cleanTitle),
       link: localeUrl(accumulatedPath) + '/'
     })
   }
 
   // Tambahkan link home di awal
   crumbs.unshift({
-    title: site.value.title,
+    title: 'Home',
     link: localeUrl('')
   })
 
@@ -48,7 +51,7 @@ function formatTitle(str) {
 <template>
   <div class="breadcrumbs" v-if="breadcrumbs">
     <div v-for="(crumb, index) in breadcrumbs" :key="index" class="crumb">
-      <a  :href="crumb.link" 
+      <a  :href="crumb.link"
           :class="{ 'current-page': index === breadcrumbs.length - 1 }">
           {{ crumb.title }}
       </a>
@@ -70,6 +73,7 @@ function formatTitle(str) {
   font-size: var(--vp-custom-block-font-size);
   color: var(--vp-c-text-2);
   line-height: 16px;
+  white-space: nowrap;
 }
 
 .crumb:hover {
