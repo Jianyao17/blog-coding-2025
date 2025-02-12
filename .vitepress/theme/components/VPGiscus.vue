@@ -1,8 +1,8 @@
 <script setup>
 import Giscus from '@giscus/vue'
 import appConfig from '../../appConfig';
-import { useData } from 'vitepress';
-import { computed } from 'vue';
+import { onContentUpdated, useData, useRoute } from 'vitepress';
+import { computed, ref } from 'vue';
 
 const { isDark } = useData()
 const theme = computed(() => 
@@ -19,6 +19,11 @@ const giscus =
   categoryId: import.meta.env.VITE_GISCUS_CATEGORY_ID,
   ...appConfig.giscus
 }
+
+const route = useRoute()
+const key = ref('')
+onContentUpdated(() => key.value = route.path)
+
 </script>
 
 <template>
@@ -27,6 +32,7 @@ const giscus =
       id="giscus_comment"
       loading="lazy"
       
+      :key="key"
       :theme="theme"
       :lang="giscus.lang"
   
