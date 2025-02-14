@@ -71,7 +71,7 @@ export default
   },
 
   googleAds: {
-    clientId: 'YOUR_GOOGLE_ADS_CLIENT_ID', 
+    enabled: false,
     adSlot: 'YOUR_GOOGLE_ADS_SLOT',        
   }
 }

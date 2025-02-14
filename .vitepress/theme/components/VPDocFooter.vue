@@ -5,8 +5,8 @@ import { useEditLink } from 'vitepress/dist/client/theme-default/composables/edi
 import { usePrevNext } from '../composables/usePreviousNext'
 import VPLink from 'vitepress/dist/client/theme-default/components/VPLink.vue'
 import VPDateTime from './VPDateTime.vue'
+import VPGoogleAds from './VPGoogleAds.vue'
 import VPGiscus from './VPGiscus.vue'
-import VPAds from './VPAds.vue'
 
 const { theme, page, frontmatter } = useData()
 
@@ -82,7 +82,7 @@ const showFooter = computed(
     </nav>
     
     <div class="ads-container">
-      <VPAds orientation="horizontal"/>
+      <VPGoogleAds orientation="horizontal"/>
     </div>
 
     <div class="comments-container" id="comments">

@@ -10,8 +10,8 @@ import VPDocFooter from '../VPDocFooter.vue'
 import VPImage from '../VPImage.vue'
 import VPBackToTop from '../VPBackToTop.vue'
 import VPImgViewer from '../VPImgViewer.vue'
+import VPGoogleAds from '../VPGoogleAds.vue'
 import VPProps from '../VPProps.vue'
-import VPAds from '../VPAds.vue'
 
 const { width: vw } = useWindowSize({
   initialWidth: 0,
@@ -40,14 +40,14 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
       </div>
       <div v-if="hasAside" class="ads">
         <div class="ads-container">
-          <VPAds orientation="vertical">
+          <VPGoogleAds orientation="vertical">
             <template #ads-top><slot name="ads-top" /></template>
             <template #ads-bottom><slot name="ads-bottom" /></template>
-          </VPAds>
+          </VPGoogleAds>
         </div>
       </div>
 
-        <div class="content">
+        <article class="content">
           <div class="content-container">
             <slot name="doc-before" />
             <VPBreadcrumbs />
@@ -59,6 +59,9 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
                 :src="frontmatter.thumbnail" 
                 :alt="frontmatter.thumbnail"
                 class="thumbnail"/>
+              <div class="ads-container2">
+                <VPGoogleAds orientation="horizontal" />
+              </div>
               <Content
                 class="vp-doc"
                 :class="[
@@ -72,7 +75,7 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
             </VPDocFooter>
             <slot name="doc-after" />
           </div>
-        </div>
+        </article>
 
         <div v-if="hasAside" class="aside">
           <div class="aside-curtain" />
@@ -183,6 +186,17 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
   scrollbar-width: none;
 }
 
+.ads-container2 {
+  height: 144px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 640px) {
+  .ads-container2 {
+    height: 120px;
+  }
+}
+
 .aside-curtain {
   position: fixed;
   bottom: 0;
@@ -213,9 +227,9 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
   top: 0;
   position: fixed;
   padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + var(--vp-doc-top-height, 0px) + 48px);
-  padding-bottom: 32px;
+  padding-bottom: 64px;
   width: 200px;
-  height: 100vh;
+  height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: none;
