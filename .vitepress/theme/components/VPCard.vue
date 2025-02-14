@@ -15,18 +15,44 @@ const props = defineProps({
     default: 'square', 
     validator: (value) => ['square', 'list'].includes(value)
   },
-  displayTags: {
-    type: Boolean,
-    default: true
-  },
   isFirst: {
     type: Boolean,
     default: false
   },
+
+  showTags: {
+    type: Boolean,
+    default: true
+  },
+  showDesc: {
+    type: Boolean,
+    default: true
+  },
+  showMetaInfo: {
+    type: Boolean,
+    default: true
+  },
+
 });
 
 const href = computed(() => withBase(props.article.link));
 const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
+
+const isNew = computed(() => 
+{
+  if (!props.article.createdAt) return false;  
+
+  const thisWeek = new Date().setDate(new Date().getDate() - 7);  
+  return new Date(props.article.createdAt) >= thisWeek;
+})
+
+const isUpdated = computed(() => 
+{
+  if (!props.article.lastUpdated) return false;
+
+  const thisWeek = new Date().setDate(new Date().getDate() - 7);
+  return new Date(props.article.lastUpdated) >= thisWeek;
+})
 
 </script>
 
@@ -36,6 +62,12 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
     :class="mode" 
     class="card"
   >
+    <!-- Badges Container -->
+    <div class="badges">
+      <div v-if="isNew" class="badge new">New 🔥</div>
+      <div v-if="isUpdated && !isNew" class="badge updated">Updated</div>
+    </div>
+
     <div class="card-content">
       <!-- Thumbnail Image -->
       <div v-if="article.thumbnail" class="thumbnail-container">
@@ -50,7 +82,7 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
       <div class="content-wrapper">
         <div class="main-content">
           <!-- Post Tags -->
-          <div v-if="displayTags && article.tags.length" class="tags-container">
+          <div v-if="showTags && article.tags.length" class="tags-container">
             <div v-for="(tag, index) in article.tags" :key="index" class="tag">
               {{ tag }}
             </div>
@@ -60,13 +92,13 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
           <span class="title">{{ article.title }}</span>
 
           <!-- Description -->
-          <div v-if="article.description" class="description">
+          <div v-if="article.description && showDesc" class="description">
             {{ article.description }}
           </div>
         </div>
 
         <!-- Publish Date & Read Time -->
-        <div v-if="article.createdAt || article.readTime" class="meta-info">
+        <div v-if="showMetaInfo && (article.createdAt || article.readTime)" class="meta-info">
           <VPDateTime v-if="article.createdAt" :date="article.createdAt"/>
           <span v-if="article.createdAt && article.readTime" class="separator">·</span>
           <span v-if="article.readTime" class="read-time">{{ article.readTime }} Minutes</span>
@@ -80,7 +112,7 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
 
 .card {
   display: block;
-  overflow: hidden;
+  position: relative;
   border-radius: 8px;
   border: 1px solid var(--vp-c-divider);
   text-decoration: none;
@@ -123,6 +155,12 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
 }
 
 .square {
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .thumbnail-image {
     width: 100%;
   }
@@ -130,9 +168,7 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
 
 .thumbnail-container {
   position: relative;
-  aspect-ratio: 16/9;
   overflow: hidden;
-  height: inherit;
 }
 
 .thumbnail-image {
@@ -147,7 +183,6 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: min-content;
   flex-grow: 1;
 }
 
@@ -254,5 +289,32 @@ const imgWidth = computed(() => (props.mode === 'list') ? '200px' : '600px')
       display: none;
     }
   }
+}
+
+.badges {
+  top: -6px;
+  left: -6px;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  z-index: 10;
+  gap: 6px;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-button-brand-text);
+  box-shadow: var(--vp-shadow-3);
+}
+
+.badge.new {
+  background-color: var(--vp-c-red-2);
+}
+
+.badge.updated {
+  background-color: var(--vp-c-brand-2);
 }
 </style>
