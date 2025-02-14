@@ -6,6 +6,7 @@ import { useArticleSorting } from '../composables/useSortingArticle';
 import { useTaxonomies } from '../composables/useTaxonomies';
 import { useCarousel } from '../composables/useCarousel';
 import VPCard from './VPCard.vue';
+import CarouselControls from './controls/CarouselControls.vue';
 
 const props = defineProps({
   heading: String,
@@ -27,6 +28,10 @@ const props = defineProps({
       'chapter-descending'
     ].includes(value)
   },
+  paginate: {
+    type: Number,
+    default: 0
+  },
   content: {
     Type: 'tags' | 'series' | 'items',
     Name: String
@@ -40,7 +45,7 @@ const props = defineProps({
 const { lang } = useLocalizationUrl()
 const { findCaseInsensitive } = useCaseInsensitiveSearch()
 const { articleSortOptions, sortedItems } = useArticleSorting()
-const { carousel, handleWheel, scroll, showNext, showPrev } = useCarousel(props.layout)
+const { carousel, showNext, showPrev, scroll } = useCarousel(props.layout)
 
 // Fetch Article's Taxonomies from json 
 const { taxonomies } = useTaxonomies()
@@ -48,8 +53,9 @@ const collection = computed(() => findCaseInsensitive(taxonomies.value , props.c
 const items = computed(() => findCaseInsensitive(collection.value, props.content.Name));
 
 const articles = computed(() => 
-  Object.entries(items.value)
-        .map(([, ref]) => taxonomies.value?.items[ref]))
+  props.content.Type === 'items' // Load items if content type is items
+  ? Object.entries(collection.value).map(([, item]) => item)
+  : Object.entries(items.value).map(([, ref]) => taxonomies.value?.items[ref]))
 
 
 const searchInput = ref('')
@@ -91,28 +97,20 @@ const filteredArticles = computed(() =>
         </select>
       </div>
     </div>
-    <div :class="layout" ref="carousel" @wheel="handleWheel">
+    <div :class="layout" ref="carousel">
       <VPCard v-for="article in filteredArticles" class="scroll-item" 
           :isFirst="article.index == 0" :key="article.index" 
           :article="article"            :showTags="false"
           :mode="cardMode" />
     </div>
-    <button v-if="showPrev"
-      @click="scroll('prev')"
-      class="nav-button prev"
-      aria-label="Previous">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-      </svg>
-    </button>
-    <button v-if="showNext"
-      @click="scroll('next')"
-      class="nav-button next"
-      aria-label="Next">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-      </svg>
-    </button>
+    
+    <!-- Carousel Controls -->
+    <CarouselControls 
+      v-if="layout === 'scroll'"
+      :show-prev="showPrev"
+      :show-next="showNext"
+      @scroll="scroll" />
+
   </div>
 </template>
 
@@ -199,72 +197,9 @@ input, select, option {
   }
 }
 
-.nav-button {
-  position: absolute;
-  top: 60%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--vp-c-bg-alt);
-  border: 1px solid var(--vp-c-divider);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  opacity: 0.9;
-  z-index: 2;
-}
-
-.nav-button:hover {
-  background-color: var(--vp-c-bg-soft);
-  border-color: var(--vp-c-brand-1);
-  transform: translateY(-50%) scale(1.05);
-  opacity: 1;
-}
-
-.nav-button svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--vp-c-text-1);
-  stroke-width: 2px;
-}
-
-.nav-button:hover svg {
-  stroke: var(--vp-c-brand-1);
-}
-
-.prev {
-  left: -24px;
-
-  svg {
-    margin-right: 2px;
-  }
-}
-
-.next {
-  right: -24px;
-
-  svg {
-    margin-left: 2px;
-  }
-}
-
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .prev {
-    left: -16px;
-  }
-
-  .next {
-    right: -16px;
   }
 }
 

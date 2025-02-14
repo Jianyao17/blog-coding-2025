@@ -1,19 +1,20 @@
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 export const useCarousel = (layout) => 
 {
-  const carousel = ref(null);
-  const showPrev = ref(false);
-  const showNext = ref(false);
-  const scrollAmount = 400;
+  const carousel = ref(null)
+  const scrollPos = ref(-1)
+  const scrollAmount = 400
 
-  const handleScroll = () => 
+  const showPrev = computed(() => UpdateVisibility(true))
+  const showNext = computed(() => UpdateVisibility(false))
+
+  const UpdateVisibility = (isPrev) => 
   {
-    if (!carousel.value) return;
+    if (!carousel.value || layout !== 'scroll') return false
 
-    const { scrollLeft, scrollWidth, clientWidth } = carousel.value;
-    showPrev.value = scrollLeft > 0;
-    showNext.value = scrollLeft + clientWidth < scrollWidth;
+    const { scrollWidth, clientWidth } = carousel.value
+    return isPrev ? scrollPos.value > 0 : scrollPos.value + clientWidth < scrollWidth
   };
 
   const scroll = (direction) => 
@@ -22,18 +23,12 @@ export const useCarousel = (layout) =>
       left: direction === 'next' ? scrollAmount : -scrollAmount,
       behavior: 'smooth'
     });
-    handleScroll();
   };
 
-  const handleWheel = (e) => 
-  {
-    if (!carousel.value || layout.value !== 'scroll') return;
+  const handleScroll = () => scrollPos.value = carousel.value?.scrollLeft
 
-    e.preventDefault();
-    carousel.value.scrollBy({ left: e.deltaY > 0 ? 400 : -400, behavior: 'smooth' });
-    handleScroll();
-  };
+  onMounted(() => carousel.value?.addEventListener('scroll', handleScroll))
+  onUnmounted(() => carousel.value?.removeEventListener('scroll', handleScroll))
 
-  onMounted(handleScroll);
-  return { carousel, showPrev, showNext, scroll, handleWheel };
+  return { carousel, showPrev, showNext, scroll };
 };
