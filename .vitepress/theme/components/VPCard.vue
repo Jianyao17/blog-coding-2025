@@ -168,6 +168,7 @@ const isUpdated = computed(() =>
 
 .thumbnail-container {
   position: relative;
+  aspect-ratio: 2/1;
   overflow: hidden;
 }
 
