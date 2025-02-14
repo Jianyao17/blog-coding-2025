@@ -28,7 +28,7 @@ const props = defineProps({
     ].includes(value)
   },
   content: {
-    Type: 'tags' | 'series',
+    Type: 'tags' | 'series' | 'items',
     Name: String
   },
   useFilter: {
@@ -49,18 +49,19 @@ const items = computed(() => findCaseInsensitive(collection.value, props.content
 
 const articles = computed(() => 
   Object.entries(items.value)
-        .map(([index, ref]) => taxonomies.value?.items[ref]))
+        .map(([, ref]) => taxonomies.value?.items[ref]))
 
 
 const searchInput = ref('')
 const hasOrder = computed(() => articles.value.every(article => 'order' in article))
-const cardMode = computed(() => ['grid', 'scroll'].includes(props.layout) ? 'square' : 'list')
 const orderBy  = ref(hasOrder.value ? props.orderBy  : 'title-ascending')
+
+const cardMode = computed(() => ['grid', 'scroll'].includes(props.layout) ? 'square' : 'list')
 const count = computed(() => filteredArticles.value.length)
 
 // Filtered and sorted articles
 const filteredArticles = computed(() => 
-{
+{  
   const filtered = articles.value
     .filter(article => article.lang?.toLowerCase().includes(lang.value.replace('/', '')))
     .filter(article => article.title.toLowerCase().includes(searchInput.value.toLowerCase()));
@@ -91,9 +92,10 @@ const filteredArticles = computed(() =>
       </div>
     </div>
     <div :class="layout" ref="carousel" @wheel="handleWheel">
-      <VPCard v-for="article in filteredArticles" :key="article.index" 
-            :mode="cardMode" :isFirst="article.index == 0" class="scroll-item"
-            :article="article" />
+      <VPCard v-for="article in filteredArticles" class="scroll-item" 
+          :isFirst="article.index == 0" :key="article.index" 
+          :article="article"            :showTags="false"
+          :mode="cardMode" />
     </div>
     <button v-if="showPrev"
       @click="scroll('prev')"
@@ -146,7 +148,7 @@ input, select, option {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, .5fr));
   gap: 12px;
 }
 
@@ -247,6 +249,12 @@ input, select, option {
 
   svg {
     margin-left: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 }
 

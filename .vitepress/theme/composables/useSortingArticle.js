@@ -3,14 +3,14 @@ export const useArticleSorting = () =>
 {
   const articleSortOptions = (hasOrder) => 
   [
-    ...(hasOrder.value ? [
-      { value: 'chapter-ascending', label: 'Chapter - Ascending' },
-      { value: 'chapter-descending', label: 'Chapter - Descending' },
+    ...(hasOrder ? [
+      { value: 'chapter-ascending',   label: 'Chapter - Ascending' },
+      { value: 'chapter-descending',  label: 'Chapter - Descending' },
     ] : []),
-    { value: 'title-ascending', label: 'Title - Ascending' },
-    { value: 'title-descending', label: 'Title - Descending' },
-    { value: 'date-ascending', label: 'Date - Ascending' },
-    { value: 'date-descending', label: 'Date - Descending' },
+    { value: 'title-ascending',   label: 'Title - Ascending' },
+    { value: 'title-descending',  label: 'Title - Descending' },
+    { value: 'date-ascending',    label: 'Date - Ascending' },
+    { value: 'date-descending',   label: 'Date - Descending' },
   ];
 
   const dateSort = (a, b) => new Date(a.createdAt) - new Date(b.createdAt);
