@@ -7,6 +7,8 @@ import { useTaxonomies } from '../composables/useTaxonomies';
 import { useCarousel } from '../composables/useCarousel';
 import VPCard from './VPCard.vue';
 import CarouselControls from './controls/CarouselControls.vue';
+import PaginationControls from './controls/PaginationControls.vue';
+import { usePagination } from '../composables/usePagination';
 
 const props = defineProps({
   heading: String,
@@ -46,6 +48,8 @@ const { lang } = useLocalizationUrl()
 const { findCaseInsensitive } = useCaseInsensitiveSearch()
 const { articleSortOptions, sortedItems } = useArticleSorting()
 const { carousel, showNext, showPrev, scroll } = useCarousel(props.layout)
+const { currentPage, totalPages, paginateItems } = usePagination(props.layout)
+
 
 // Fetch Article's Taxonomies from json 
 const { taxonomies } = useTaxonomies()
@@ -74,6 +78,9 @@ const filteredArticles = computed(() =>
   return sortedItems(filtered, orderBy.value, hasOrder.value);
 });
 
+const paginatedArticles = computed(() => 
+  paginateItems(filteredArticles.value, props.paginate))
+  
 </script>
 
 <template>
@@ -98,12 +105,18 @@ const filteredArticles = computed(() =>
       </div>
     </div>
     <div :class="layout" ref="carousel">
-      <VPCard v-for="article in filteredArticles" class="scroll-item" 
+      <VPCard v-for="article in paginatedArticles" class="scroll-item" 
           :isFirst="article.index == 0" :key="article.index" 
           :article="article"            :showTags="false"
           :mode="cardMode" />
     </div>
     
+    <PaginationControls
+      v-if="paginate > 0 && layout !== 'scroll'"
+      @page-change="newPage => currentPage = newPage"
+      :current-page="currentPage"
+      :total-pages="totalPages" />
+
     <!-- Carousel Controls -->
     <CarouselControls 
       v-if="layout === 'scroll'"
