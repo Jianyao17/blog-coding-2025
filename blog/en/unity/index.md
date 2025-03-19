@@ -14,6 +14,6 @@ hero:
   layout="list"
   :content="{
    Type: 'tags',
-   Name: 'web dev'
+   Name: 'javascript'
   }"
 />

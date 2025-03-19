@@ -5,8 +5,12 @@
       "/markdown-examples",
       "/en/markdown-examples"
     ],
+    "Javascript Tutorial": [
+      "/javascript-tutorial/1-javascript-intro/index",
+      "/javascript-tutorial/2-javascript-function-data/index"
+    ],
     "Tutorial Unity": [
-      "/unity/tutorial/index.id"
+      "/unity/tutorial/index"
     ],
     "Website": [
       "/website/javasrcript/index"
@@ -26,22 +30,32 @@
       "/markdown-examples",
       "/en/markdown-examples"
     ],
-    "unity": [
-      "/unity/tutorial/index.id"
-    ],
-    "game dev": [
-      "/unity/tutorial/index.id"
-    ],
-    "c#": [
-      "/unity/tutorial/index.id"
-    ],
-    "shader": [
-      "/unity/tutorial/index.id"
-    ],
-    "web dev": [
+    "javascript": [
+      "/javascript-tutorial/1-javascript-intro/index",
+      "/javascript-tutorial/2-javascript-function-data/index",
       "/website/javasrcript/index"
     ],
-    "javascript": [
+    "beginner": [
+      "/javascript-tutorial/1-javascript-intro/index",
+      "/javascript-tutorial/2-javascript-function-data/index"
+    ],
+    "webdev": [
+      "/javascript-tutorial/1-javascript-intro/index",
+      "/javascript-tutorial/2-javascript-function-data/index"
+    ],
+    "unity": [
+      "/unity/tutorial/index"
+    ],
+    "game dev": [
+      "/unity/tutorial/index"
+    ],
+    "c#": [
+      "/unity/tutorial/index"
+    ],
+    "shader": [
+      "/unity/tutorial/index"
+    ],
+    "web dev": [
       "/website/javasrcript/index"
     ],
     "node.js": [
@@ -98,7 +112,7 @@
       "link": "/markdown-examples"
     },
     "/en/markdown-examples": {
-      "lang": "id",
+      "lang": "en",
       "createdAt": "2022-11-24T00:00:00.000Z",
       "lastUpdated": "2022-12-01T00:00:00.000Z",
       "title": "Roadmap Belajar Unity 2025 Bahasa Indonesia",
@@ -121,7 +135,55 @@
       "thumbnail": "/en/wallpaperflarecom_wallpaper.jpg",
       "link": "/en/markdown-examples"
     },
-    "/unity/tutorial/index.id": {
+    "/javascript-tutorial/1-javascript-intro/index": {
+      "lang": "id",
+      "createdAt": "2025-02-10T00:00:00.000Z",
+      "lastUpdated": "2025-02-12T00:00:00.000Z",
+      "title": "Mengenal Javscript",
+      "description": "Pengenalan Bahasa Pemrograman Javascript untuk pemula",
+      "readTime": 5,
+      "author": [
+        {
+          "name": "Jianyao17",
+          "avatar": "/Jianyao17.png",
+          "link": "https://github.com/Jianyao17"
+        }
+      ],
+      "series": "Javascript Tutorial",
+      "order": 1,
+      "tags": [
+        "javascript",
+        "beginner",
+        "webdev"
+      ],
+      "thumbnail": "/javascript-tutorial/1-javascript-intro/javascript.png",
+      "link": "/javascript-tutorial/1-javascript-intro/index"
+    },
+    "/javascript-tutorial/2-javascript-function-data/index": {
+      "lang": "id",
+      "createdAt": "2025-02-11T00:00:00.000Z",
+      "lastUpdated": "2025-02-14T00:00:00.000Z",
+      "title": "Mengenal Function dan Struktur Data dalam JavaScript",
+      "description": "Pengenalan Function dan Struktur Data dalam JavaScript",
+      "readTime": 5,
+      "author": [
+        {
+          "name": "Jianyao17",
+          "avatar": "/Jianyao17.png",
+          "link": "https://github.com/Jianyao17"
+        }
+      ],
+      "series": "Javascript Tutorial",
+      "order": 2,
+      "tags": [
+        "javascript",
+        "beginner",
+        "webdev"
+      ],
+      "thumbnail": "/javascript-tutorial/2-javascript-function-data/javascript.png",
+      "link": "/javascript-tutorial/2-javascript-function-data/index"
+    },
+    "/unity/tutorial/index": {
       "lang": "id-ID",
       "createdAt": "2025-01-13T00:00:00.000Z",
       "lastUpdated": "2025-01-15T00:00:00.000Z",
@@ -144,10 +206,10 @@
         "shader"
       ],
       "thumbnail": "/unity/tutorial/star-rail-kuru.gif",
-      "link": "/unity/tutorial/index.id"
+      "link": "/unity/tutorial/index"
     },
     "/website/javasrcript/index": {
-      "lang": "in-ID",
+      "lang": "id",
       "createdAt": "2025-01-28T00:00:00.000Z",
       "lastUpdated": "2025-01-28T00:00:00.000Z",
       "title": "JavaScript 101",
@@ -161,7 +223,7 @@
         }
       ],
       "series": "Website",
-      "order": 1,
+      "order": null,
       "tags": [
         "web dev",
         "javascript",

@@ -11,9 +11,11 @@ hero:
 
 <VPListArticles 
   heading="Unity"
-  layout="list"
+  layout="grid"
+  orderBy="date-descending"
+  :paginate="3"
   :content="{
-   Type: 'tags',
-   Name: 'web dev'
+   Type: 'items',
+   Name: 'javascript tutorial'
   }"
 />

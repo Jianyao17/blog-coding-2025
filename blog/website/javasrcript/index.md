@@ -1,12 +1,12 @@
 ---
-lang: in-ID
+lang: id
 createdAt: 2025-01-28
 lastUpdated: 2025-01-28
 title: 'JavaScript 101'
 description: "Tutorial JavaScript Pemula"
 readTime: 5 # Minutes
 series: Website
-order: 1
+order: 0
 author:
   - name: Jianyao17
     avatar: /Jianyao17.png
