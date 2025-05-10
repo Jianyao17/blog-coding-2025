@@ -6,6 +6,7 @@ import { GenerateRobotsTxt } from './generate-robots.js';
 import { CopyAssetsToBuild } from './copy-assets.js';
 import { InsertOGMetadata } from './og-metadata.js';
 import { configDotenv } from 'dotenv';
+import mermaid from 'mermaid';
 
 // Load .env file
 configDotenv()
@@ -69,23 +70,44 @@ export default defineConfig({
 
   cleanUrls: true,  
   markdown: {
-    config: (md) => md.use((md) => 
+    config: (md) => 
     {
       // Replace <img> inside markdown content with 
       // custom VPImage component
-      md.renderer.rules.image = (tokens, idx) => 
-      {
-        const token = tokens[idx]
-        const src = token.attrGet('src')
-        const alt = token.attrGet('alt')
+      md.use((md) => {
+        md.renderer.rules.image = (tokens, idx) => 
+        {
+          const token = tokens[idx];
+          const src = token.attrGet('src');
+          const alt = token.attrGet('alt');
 
-        return `
+          return `
           <VPImage 
             src="${src}" 
             alt="${alt}"/>
-        `
-      }
-    })
+        `;
+        };
+      });
+
+      // Add mermaid renderer
+      md.use((md) => {
+        const fence = md.renderer.rules.fence
+        md.renderer.rules.fence = (...args) => 
+        {
+          const [tokens, idx] = args
+          const token = tokens[idx]
+          const lang = token.info.trim()
+
+          if (lang === 'mermaid') {
+            return `
+            <VPMermaid class="language-mermaid" id="mermaid-${idx}">
+              ${token.content}
+            </VPMermaid>`
+          }
+          return fence(...args)
+        }
+      });
+    }
   },
 
   // ============ Scripts Runner ============

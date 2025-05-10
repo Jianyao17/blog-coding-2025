@@ -4,13 +4,14 @@ import { useRoute } from 'vitepress'
 import { useWindowSize } from '@vueuse/core'
 import { useData } from 'vitepress/dist/client/theme-default/composables/data'
 import { useSidebar } from 'vitepress/dist/client/theme-default/composables/sidebar'
+import VPMermaidViewer from '../VPMermaidViewer.vue'
 import VPBreadcrumbs from '../VPBreadcrumbs.vue'
 import VPDocAside from '../VPDocAside.vue'
 import VPDocFooter from '../VPDocFooter.vue'
-import VPImage from '../VPImage.vue'
 import VPBackToTop from '../VPBackToTop.vue'
-import VPImgViewer from '../VPImgViewer.vue'
 import VPGoogleAds from '../VPGoogleAds.vue'
+import VPImgViewer from '../VPImgViewer.vue'
+import VPImage from '../VPImage.vue'
 import VPProps from '../VPProps.vue'
 
 const { width: vw } = useWindowSize({
@@ -36,6 +37,7 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
 
       <div>
         <VPImgViewer />
+        <VPMermaidViewer />
         <VPBackToTop :isMobile="true"/>
       </div>
       <div v-if="hasAside" class="ads">

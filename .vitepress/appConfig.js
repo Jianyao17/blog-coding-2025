@@ -1,4 +1,3 @@
-
 const btnStyle = {
   size: 'large',
   show: 4,
@@ -73,5 +72,36 @@ export default
   googleAds: {
     enabled: false,
     adSlot: 'YOUR_GOOGLE_ADS_SLOT',        
+  },
+
+  mermaidOptions: {
+    securityLevel: 'loose',
+    theme: 'dark',
+    flowchart: { 
+      diagramPadding: 15,
+      useMaxWidth: true,
+      htmlLabels: true
+    },
+    sequence: {
+      diagramMarginX: 50,
+      diagramMarginY: 10,
+      actorMargin: 50
+    },
+    gantt: {
+      axisFormat: '%Y-%m-%d'
+    },
+    er: {
+      layoutDirection: 'TB'
+    },
+  },
+
+  mermaidViewerOptions: {
+    panzoom: {
+      zoomDoubleClickSpeed: 1,
+      transformOrigin: {x: 0.25, y: 0.15},
+      autoCenter: true,
+      maxZoom: 10,
+      minZoom: 1,
+    }
   }
 }

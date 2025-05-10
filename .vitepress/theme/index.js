@@ -4,10 +4,12 @@ import DefaultTheme from 'vitepress/theme';
 import Layout from './CustomLayout.vue';
 
 import VPListArticles from './components/VPListArticles.vue';
+import VPMermaid from './components/VPMermaid.vue';
 import VPImage from './components/VPImage.vue';
 
 import './viewer.css';
 import './style.css';
+import VPMermaidViewer from './components/VPMermaidViewer.vue';
 
 
 export default {
@@ -16,6 +18,8 @@ export default {
 
   enhanceApp({ app, router, siteData }) {
     app.component('VPListArticles', VPListArticles); 
+    
+    app.component('VPMermaid', VPMermaid);
     app.component('VPImage', VPImage);    
   },
 }
