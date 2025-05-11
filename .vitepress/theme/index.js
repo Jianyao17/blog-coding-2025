@@ -9,7 +9,7 @@ import VPImage from './components/VPImage.vue';
 
 import './viewer.css';
 import './style.css';
-import VPMermaidViewer from './components/VPMermaidViewer.vue';
+
 
 
 export default {

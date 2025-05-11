@@ -6,7 +6,6 @@ import { GenerateRobotsTxt } from './generate-robots.js';
 import { CopyAssetsToBuild } from './copy-assets.js';
 import { InsertOGMetadata } from './og-metadata.js';
 import { configDotenv } from 'dotenv';
-import mermaid from 'mermaid';
 
 // Load .env file
 configDotenv()
@@ -98,11 +97,16 @@ export default defineConfig({
           const token = tokens[idx]
           const lang = token.info.trim()
 
-          if (lang === 'mermaid') {
+          if (lang === 'mermaid') 
+          {
+            // Encode the content of the token before passing it to the component
+            const encodedContent = encodeURIComponent(token.content);
             return `
-            <VPMermaid class="language-mermaid" id="mermaid-${idx}">
-              ${token.content}
-            </VPMermaid>`
+              <VPMermaid
+                class="language-mermaid"
+                id="mermaid-${idx}"
+                diagramCode="${encodedContent}">
+              </VPMermaid>`;
           }
           return fence(...args)
         }

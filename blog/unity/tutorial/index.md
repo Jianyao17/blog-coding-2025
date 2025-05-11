@@ -89,18 +89,21 @@ Script ini memproses file markdown untuk membuat sistem taksonomi terstruktur ya
 
 ```mermaid
 sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
-
+    par Alice to Bob
+        Alice->>Bob: Hello guys!
+    and Alice to John
+        Alice->>John: Hello guys!
+    end
+    Bob-->>Alice: Hi Alice! 
+    John-->>Alice: Hi Alice! 
 ```
 
 ```mermaid
-sequenceDiagram
-    Dontol->>John: Hello John, how are you?
-    John-->>Dontol: Great!
-    Dontol-)John: See you later!
-
+pie title Pets adopted by volunteers
+    "1" : 90
+    "2" : 90
+    "3" : 90
+    "4" : 90
 ```
 
 ## Cara Penggunaan

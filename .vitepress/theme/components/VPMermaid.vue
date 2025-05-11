@@ -1,41 +1,68 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import { useData } from 'vitepress'
-import mermaid from 'mermaid'
+import { computed, onMounted, ref } from 'vue'
 import appConfig from '../../appConfig'
+import mermaid from 'mermaid'
 
 const props = defineProps({
   id: {
     type: String,
     required: true
+  },
+  diagramCode: {
+    type: String,
+    required: true
+  },
+  bgColor: { 
+    type: String, 
+    default: 'transparent' 
   }
 })
 
-const container = ref(null)
 const renderedSvg = ref('')
 const isCopied = ref(false)
 
+// Kode Mermaid yang sudah di-decode dan di-trim
+const mermaidToRender = computed(() => 
+{
+  try 
+  {
+    // Decode kode yang diterima dari prop
+    const decoded = decodeURIComponent(props.diagramCode);
+    return decoded.trim(); // Trim whitespace di awal/akhir keseluruhan blok
+
+  } catch (e) {
+    console.error("Error decoding diagram code:", e);
+    return `%% Error decoding diagram code: ${e.message} %%`;
+  }
+});
+
+const containerStyle = computed(() => ({ 
+  backgroundColor: props.bgColor || null
+}));
+
 async function copyToClipboard() 
 {
-  const code = container.value?.textContent?.trim()
+  const code = mermaidToRender.value;
   if (!code) return
 
   try {
     await navigator.clipboard.writeText(code)
-    
+
     isCopied.value = true
     setTimeout(() => { isCopied.value = false}, 2000)
   } catch (err) 
   {
     const textarea = document.createElement('textarea')
-    textarea.value = code
     textarea.style.position = 'fixed'
     textarea.style.opacity = '0'
+    textarea.value = code
+
     document.body.appendChild(textarea)
     textarea.select()
     document.execCommand('copy')
     document.body.removeChild(textarea)
     isCopied.value = true
+
     setTimeout(() => { isCopied.value = false }, 2000)
   }
 }
@@ -43,24 +70,23 @@ async function copyToClipboard()
 onMounted(async () => 
 {
   mermaid.initialize(appConfig.mermaidOptions)  
-  try {
-    const { svg } = await mermaid.render(props.id, container.value.textContent)
+  const code = mermaidToRender.value; 
+ 
+  try 
+  {
+    const { svg } = await mermaid.render(props.id, code)
     renderedSvg.value = svg
+
   } catch (error) {
     console.error('Failed to render diagram:', error)
-    renderedSvg.value = `<div class="error">Error rendering diagram: ${error.message}</div>`
   }
 })
 </script>
 
 <template>
-  <div class="mermaid-container">
-    <pre ref="container" style="display: none">
-      <slot></slot>
-    </pre>
+  <div class="mermaid-container" :style="containerStyle">
     <div class="mermaid-render" v-html="renderedSvg"></div>
-    <button class="copy" 
-      :class="{ copied: isCopied }" 
+    <button class="copy" :class="{ copied: isCopied }" 
       @click.stop="copyToClipboard"></button>
     <span class="lang">mermaid</span>
   </div>
@@ -72,13 +98,12 @@ onMounted(async () =>
   cursor: pointer;
   margin: 16px auto;
   padding: 24px;
-  background-color: var(--vp-c-bg) !important;
   border-radius: 8px;
   overflow: auto;
 }
 
 .mermaid-render :deep(svg) {
-  max-width: 100%;
+  max-width: 100% !important;
   height: auto;
 }
 
