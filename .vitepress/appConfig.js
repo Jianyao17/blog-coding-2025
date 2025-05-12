@@ -77,14 +77,14 @@ export default
   mermaidOptions: {
     startOnLoad: false,
     securityLevel: 'loose',
-    
   },
 
   mermaidViewerOptions: {
     panzoom: {
       zoomDoubleClickSpeed: 1,
-      transformOrigin: {x: 0.1705, y: 0.15},
+      transformOrigin: {x: 0.5, y: 0.5},
       autoCenter: true,
+      bounds: true,
       maxZoom: 10,
       minZoom: 1,
     }
