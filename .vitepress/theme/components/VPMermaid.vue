@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
+import { useData } from 'vitepress'
 import appConfig from '../../appConfig'
 import mermaid from 'mermaid'
 
@@ -18,8 +19,12 @@ const props = defineProps({
   }
 })
 
-const renderedSvg = ref('')
+const { isDark } = useData()
 const isCopied = ref(false)
+
+const renderedSvg = computed(() => isDark.value ? darkSvg.value : lightSvg.value)
+const lightSvg = ref('')
+const darkSvg = ref('')
 
 // Kode Mermaid yang sudah di-decode dan di-trim
 const mermaidToRender = computed(() => 
@@ -35,6 +40,7 @@ const mermaidToRender = computed(() =>
     return `%% Error decoding diagram code: ${e.message} %%`;
   }
 });
+
 
 const containerStyle = computed(() => ({ 
   backgroundColor: props.bgColor || null
@@ -69,13 +75,19 @@ async function copyToClipboard()
 
 onMounted(async () => 
 {
-  mermaid.initialize(appConfig.mermaidOptions)  
-  const code = mermaidToRender.value; 
- 
+  const code = mermaidToRender.value
+  
   try 
   {
-    const { svg } = await mermaid.render(props.id, code)
-    renderedSvg.value = svg
+    // Render light theme
+    mermaid.initialize({ ...appConfig.mermaidOptions, theme: 'neutral' })
+    const { svg: light } = await mermaid.render(`${props.id}-light`, code)
+    lightSvg.value = light
+
+    // Render dark theme
+    mermaid.initialize({ ...appConfig.mermaidOptions, theme: 'dark' })
+    const { svg: dark } = await mermaid.render(`${props.id}-dark`, code)
+    darkSvg.value = dark
 
   } catch (error) {
     console.error('Failed to render diagram:', error)

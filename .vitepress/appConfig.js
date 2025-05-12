@@ -77,7 +77,7 @@ export default
   mermaidOptions: {
     startOnLoad: false,
     securityLevel: 'loose',
-    theme: 'dark',
+    
   },
 
   mermaidViewerOptions: {
