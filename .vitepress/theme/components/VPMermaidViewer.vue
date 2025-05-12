@@ -41,16 +41,66 @@ function disposePanzoom()
   panzoomInstance.value = null
 }
 
+// Download Diagarm as PNG
+const downloadPNG = () => 
+{
+  const svg = previewContainer.value?.querySelector('svg')
+  if (!svg) return
+  
+  // Get SVG dimensions
+  const svgData = new XMLSerializer().serializeToString(svg)
+  const { width, height } = svg.getBoundingClientRect()
+  
+  // Calculate optimal scale based on screen height
+  const maxHeight = Math.min(window.innerHeight * 2, 1440) // Cap at 1440px
+  const scale = Math.min(maxHeight / height, 3) // Cap scale at 3x
+  
+  // Create scaled canvas
+  const canvas = document.createElement('canvas')
+  canvas.width = width * scale
+  canvas.height = height * scale
+  
+  const ctx = canvas.getContext('2d')
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.scale(scale, scale)
+  
+  const img = new Image()
+  img.onload = () => 
+  {
+    ctx.drawImage(img, 0, 0, width, height)
+    
+    const link = document.createElement('a')
+    link.href = canvas.toDataURL('image/png')
+    link.download = 'diagram.png'
+    link.click()
+  }
+  img.src = 'data:image/svg+xml;base64,' + btoa(svgData)
+}
+
 const center = () => 
 {
   const rect = previewContainer.value?.getBoundingClientRect() || { left: 0, top: 0, width: 0, height: 0 };
   return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
 };
 
+// Debounced zoom controls
+let zoomTimeout
+const debouncedZoom = (fn) => 
+{
+  clearTimeout(zoomTimeout)
+  zoomTimeout = setTimeout(() => fn(), 50)
+}
 
-// Zoom controls
-const zoomIn = () => panzoomInstance.value?.smoothZoom(center().x, center().y, 1.2)
-const zoomOut = () => panzoomInstance.value?.smoothZoom(center().x, center().y, 0.8)
+const zoomIn = () => debouncedZoom(() => panzoomInstance.value?.smoothZoom(center().x, center().y, 1.5))
+const zoomOut = () => debouncedZoom(() => panzoomInstance.value?.smoothZoom(center().x, center().y, 0.5))
+const resetView = () => 
+{
+  if (!panzoomInstance.value) return
+  
+  // Reset zoom and position
+  panzoomInstance.value.zoomAbs(0, 0, 1)
+  panzoomInstance.value.moveTo(0, 0)
+}
 
 // Event handlers
 const toggleLock = () => isLocked.value = !isLocked.value
@@ -98,8 +148,9 @@ onUnmounted(() => {
           <ul>
             <li class="viewer-zoom-in" @click="zoomIn" />
             <li class="viewer-zoom-out" @click="zoomOut" />
-            <li :class="['viewer-one-to-one', {'viewer-active': isLocked}]" 
-                @click.self="toggleLock" />
+            <li class="viewer-reset" @click="resetView" />
+            <li class="viewer-download" @click="downloadPNG" />
+            <li :class="['viewer-lock', {'is-active': isLocked}]" @click="toggleLock" />
           </ul>
         </div>
 
@@ -169,38 +220,75 @@ onUnmounted(() => {
 }
 
 .viewer-toolbar {
-  position: absolute;
-  bottom: 30px;
+  position: fixed;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
 }
 
-.viewer-toolbar :deep(ul) {
+.viewer-toolbar ul {
   display: flex;
-  gap: 8px;
+  list-style: none;
   padding: 8px;
-  margin: 0 auto 16px;
-  border-radius: 24px;
+  margin: 0;
+  gap: 8px;
 }
 
-.viewer-toolbar :deep(li) {
-  width: 40px;
-  height: 40px;
+.viewer-toolbar li {
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 1px solid var(--vp-c-border);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
   position: relative;
 }
 
-.viewer-toolbar :deep(li::before) {
+.viewer-toolbar li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.viewer-toolbar li::before {
+  content: '';
   position: absolute;
   top: 18px;
   left: 18px;
   transform: translate(-50%, -50%);
-  font-size: 16px;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Icon definitions */
+.viewer-zoom-in::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z'/%3E%3C/svg%3E");
+}
+
+.viewer-zoom-out::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 13H5v-2h14v2z'/%3E%3C/svg%3E");
+}
+
+.viewer-reset::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6s-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8z'/%3E%3C/svg%3E");
+}
+
+.viewer-download::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19 9h-4V3H9v6H5l7 7l7-7zM5 18v2h14v-2H5z'/%3E%3C/svg%3E");
+}
+
+.viewer-lock::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1c1.71 0 3.1 1.39 3.1 3.1v2z'/%3E%3C/svg%3E");
+}
+
+.viewer-lock.is-active {
+  background-color: var(--vp-button-brand-bg) !important;
+}
+
+.viewer-lock.is-active::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1c1.71 0 3.1 1.39 3.1 3.1v2z'/%3E%3C/svg%3E");
 }
 
 .viewer-fade-enter-active,
