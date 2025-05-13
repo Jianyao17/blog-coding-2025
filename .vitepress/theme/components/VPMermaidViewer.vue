@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import appConfig from '../../app.config'
 import panzoom from 'panzoom'
-import appConfig from '../../appConfig'
 
 // Refs
 const previewContainer = ref(null)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue';
-import appConfig from '../../appConfig';
+import appConfig from '../../app.config';
 
 defineProps({
   orientation: {

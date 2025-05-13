@@ -1,6 +1,6 @@
 import { join, parse, relative, extname } from 'path'
 import { mkdirSync, readdirSync } from 'fs'
-import appConfig from './appConfig'
+import appConfig from '../app.config'
 import sharp from 'sharp'
 
 export const imgConfig = {

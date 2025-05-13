@@ -1,6 +1,6 @@
 import { join, relative, extname, parse } from 'path'
 import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'fs'
-import appConfig from './appConfig'
+import appConfig from '../app.config'
 
 
 const blogDir = appConfig.sourceDir

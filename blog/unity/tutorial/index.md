@@ -88,22 +88,64 @@ Script ini memproses file markdown untuk membuat sistem taksonomi terstruktur ya
 ## Alur Proses
 
 ```mermaid
-sequenceDiagram
-    par Alice to Bob
-        Alice->>Bob: Hello guys!
-    and Alice to John
-        Alice->>John: Hello guys!
-    end
-    Bob-->>Alice: Hi Alice! 
-    John-->>Alice: Hi Alice! 
+%%{init: { 'logLevel': 'debug', 'theme': 'base' } }%%
+      gitGraph
+        commit
+        branch hotfix
+        checkout hotfix
+        commit
+        branch develop
+        checkout develop
+        commit id:"ash" tag:"abc"
+        branch featureB
+        checkout featureB
+        commit type:HIGHLIGHT
+        checkout main
+        checkout hotfix
+        commit type:NORMAL
+        checkout develop
+        commit type:REVERSE
+        checkout featureB
+        commit
+        checkout main
+        merge hotfix
+        checkout featureB
+        commit
+        checkout develop
+        branch featureA
+        commit
+        checkout develop
+        merge hotfix
+        checkout featureA
+        commit
+        checkout featureB
+        commit
+        checkout develop
+        merge featureA
+        branch release
+        checkout release
+        commit
+        checkout main
+        commit
+        checkout release
+        merge main
+        checkout develop
+        merge release
 ```
 
 ```mermaid
-pie title Pets adopted by volunteers
-    "1" : 90
-    "2" : 90
-    "3" : 90
-    "4" : 90
+sequenceDiagram
+    Alice->>Bob: Hello Bob, how are you ?
+    Bob->>Alice: Fine, thank you. And you?
+    create participant Carl
+    Alice->>Carl: Hi Carl!
+    create actor D as Donald
+    Carl->>D: Hi!
+    destroy Carl
+    Alice-xCarl: We are too many
+    destroy Bob
+    Bob->>Alice: I agree
+
 ```
 
 ## Cara Penggunaan

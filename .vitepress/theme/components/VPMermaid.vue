@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
-import appConfig from '../../appConfig'
+import appConfig from '../../app.config'
 import mermaid from 'mermaid'
 
 const props = defineProps({

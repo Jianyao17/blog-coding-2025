@@ -1,6 +1,6 @@
 <script setup>
 import Giscus from '@giscus/vue'
-import appConfig from '../../appConfig';
+import appConfig from '../../app.config';
 import { onContentUpdated, useData, useRoute } from 'vitepress';
 import { computed, ref } from 'vue';
 

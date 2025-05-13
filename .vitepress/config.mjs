@@ -1,10 +1,10 @@
 import { defineConfig } from 'vitepress'
-import { TransoformImages } from './img-processing.js';
-import { GenerateTaxonomiesJSON } from './taxonomies.js';
-import { TaxonomiesHotUpdate } from './taxonomies.dev.js';
-import { GenerateRobotsTxt } from './generate-robots.js';
-import { CopyAssetsToBuild } from './copy-assets.js';
-import { InsertOGMetadata } from './og-metadata.js';
+import { TransoformImages } from './scripts/img-processing.js';
+import { GenerateTaxonomiesJSON } from './scripts/taxonomies.js';
+import { TaxonomiesHotUpdate } from './scripts/taxonomies.dev.js';
+import { GenerateRobotsTxt } from './scripts/generate-robots.js';
+import { CopyAssetsToBuild } from './scripts/copy-assets.js';
+import { InsertOGMetadata } from './scripts/og-metadata.js';
 import { configDotenv } from 'dotenv';
 
 // Load .env file

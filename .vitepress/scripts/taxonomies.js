@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readdirSync, 
          readFileSync, writeFileSync } from 'fs';
-import appConfig from './appConfig'
+import appConfig from '../app.config'
 import matter from 'gray-matter';
 import path from 'path';
 

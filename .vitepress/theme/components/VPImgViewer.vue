@@ -2,7 +2,7 @@
 import Viewer from 'viewerjs';
 import { useRoute } from 'vitepress';
 import { onMounted, onUnmounted, ref, watch } from 'vue';
-import appConfig from '../../appConfig.js';
+import appConfig from '../../app.config.js';
 
 const options = appConfig.imgViewerOptions
 const viewerInstance = ref(null)
