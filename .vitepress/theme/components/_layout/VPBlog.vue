@@ -56,7 +56,7 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
             <main class="main">
               <div class="title">{{ frontmatter.title }}</div>
               <VPProps class="blog-props" />
-              <VPImage 
+              <VPImage v-if="frontmatter.thumbnail"
                 :isFirst="true"
                 :src="frontmatter.thumbnail" 
                 :alt="frontmatter.thumbnail"
