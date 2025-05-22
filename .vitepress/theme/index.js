@@ -1,7 +1,7 @@
 // https://vitepress.dev/guide/custom-theme
 import { h, provide } from 'vue'
 import DefaultTheme from 'vitepress/theme';
-import Layout from './CustomLayout.vue';
+import Layout from './AppLayout.vue';
 
 import VPListArticles from './components/VPListArticles.vue';
 import VPMermaid from './components/VPMermaid.vue';
