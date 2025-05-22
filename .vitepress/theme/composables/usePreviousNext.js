@@ -32,6 +32,12 @@ export function usePrevNext()
     return parts.length > 0 ? parts[parts.length - 1] : ''
   }
 
+  // Fungsi untuk mengambil prefix bahasa dari path, misal: '/en/' atau '/'
+  function getLangPrefix(path) 
+  {
+    const match = path.match(/^\/([a-z]{2})\//)
+    return match ? `/${match[1]}/` : '/'
+  }
 
   const sortedPages = computed(() => 
   {
@@ -40,11 +46,16 @@ export function usePrevNext()
 
     // Ambil semua halaman dan buat salinan untuk diurutkan
     const parrentDir = baseDir(route.path)    
+    const langPrefix = getLangPrefix(route.path)
+
     const pages = computed(() => 
     {      
-      return Object.entries(taxonomies.value.items)
-                   .filter(([, article]) => baseDir(article.link) === parrentDir)
-                   .map(([, article]) => article)
+      return Object
+        .entries(taxonomies.value.items)
+        .filter(([, article]) => 
+          baseDir(article.link) === parrentDir && 
+          getLangPrefix(article.link) === langPrefix)
+        .map(([, article]) => article)
     })    
 
     return pages.value.sort((a, b) => 
