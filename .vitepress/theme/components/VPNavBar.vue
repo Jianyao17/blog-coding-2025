@@ -9,7 +9,7 @@ import VPNavBarHamburger from 'vitepress/dist/client/theme-default/components/VP
 import VPNavBarMenu from 'vitepress/dist/client/theme-default/components/VPNavBarMenu.vue'
 import VPNavBarSocialLinks from 'vitepress/dist/client/theme-default/components/VPNavBarSocialLinks.vue'
 import VPNavBarTitle from 'vitepress/dist/client/theme-default/components/VPNavBarTitle.vue'
-import VPNavBarTranslations from 'vitepress/dist/client/theme-default/components/VPNavBarTranslations.vue'
+import VPNavBarTranslations from './VPNavBarTranslations.vue'
 import VPNavBarSearch from './VPNavBarSearch.vue'
 
 const props = defineProps<{
