@@ -13,8 +13,12 @@ const { taxonomies } = useTaxonomies();
 const availableLocales = computed(() => 
   localeLinks.value.filter((locale: { link: string }) => 
   {
-    // Normalize path: treat /foo/bar and /foo/bar/index as equivalent
-    const normalize = (path: string) => path.replace(/\/index$/, '').replace(/\/$/, '');
+    // Normalize path: treat /foo/bar, /foo/bar/index, and remove anchor links
+    const normalize = (path: string) =>
+      path.replace(/#.*$/, '') 
+          .replace(/\/index$/, '')
+          .replace(/\/$/, ''); 
+
     const normalizedLink = normalize(locale.link);
 
     // Find a matching taxonomy item with normalized path
