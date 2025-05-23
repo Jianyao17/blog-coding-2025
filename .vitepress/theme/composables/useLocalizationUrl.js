@@ -8,5 +8,5 @@ export const useLocalizationUrl = () =>
   const lang = computed(() => localeIndex.value === 'root' ? '' : `/${localeIndex.value}`)
   const localeUrl = (inUrl) => inUrl.startsWith('/') ? lang.value + inUrl : `${lang.value}/${inUrl}`
 
-  return { localeUrl, lang }
+  return { localeUrl }
 }

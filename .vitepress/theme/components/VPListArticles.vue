@@ -1,14 +1,15 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useLocalizationUrl } from '../composables/useLocalizationUrl';
+import { ref, computed, onMounted, watch } from 'vue';
+import { useData } from 'vitepress/dist/client/theme-default/composables/data'
 import { useCaseInsensitiveSearch } from '../composables/useCaseInsensitiveSearch';
 import { useArticleSorting } from '../composables/useSortingArticle';
 import { useTaxonomies } from '../composables/useTaxonomies';
+import { usePagination } from '../composables/usePagination';
 import { useCarousel } from '../composables/useCarousel';
-import VPCard from './VPCard.vue';
+
 import CarouselControls from './controls/CarouselControls.vue';
 import PaginationControls from './controls/PaginationControls.vue';
-import { usePagination } from '../composables/usePagination';
+import VPCard from './VPCard.vue';
 
 const props = defineProps({
   heading: String,
@@ -44,7 +45,7 @@ const props = defineProps({
   },
 })
 
-const { lang } = useLocalizationUrl()
+const { lang } = useData();
 const { findCaseInsensitive } = useCaseInsensitiveSearch()
 const { articleSortOptions, sortedItems } = useArticleSorting()
 const { carousel, showNext, showPrev, scroll } = useCarousel(props.layout)
@@ -73,7 +74,7 @@ const count = computed(() => filteredArticles.value.length)
 const filteredArticles = computed(() => 
 {  
   const filtered = articles.value
-    .filter(article => article.lang?.toLowerCase().includes(lang.value.replace('/', '')))
+    .filter(article => article.lang?.toLowerCase().includes(lang.value))
     .filter(article => article.title.toLowerCase().includes(searchInput.value.toLowerCase()));
   return sortedItems(filtered, orderBy.value, hasOrder.value);
 });
