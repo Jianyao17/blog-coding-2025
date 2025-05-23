@@ -20,11 +20,15 @@ const availableLocales = computed(() =>
           .replace(/\/$/, ''); 
 
     const normalizedLink = normalize(locale.link);
+    
+    // Cari key yang cocok di taxonomies.items atau taxonomies.pages dengan normalizedLink
+    const items = taxonomies.value?.items || {};
+    const pages = taxonomies.value?.pages || {};
 
-    // Find a matching taxonomy item with normalized path
-    return Object
-      .keys(taxonomies.value?.items || {})
-      .some(key => normalize(key) === normalizedLink);
+    const foundInItems = Object.keys(items).some(key => normalize(key) === normalizedLink);
+    const foundInPages = Object.keys(pages).some(key => normalize(key) === normalizedLink);
+
+    return foundInItems || foundInPages;
   })
 )
 

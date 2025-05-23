@@ -38,9 +38,19 @@ function GetListFrontmatterData()
 
 function CreateTaxonomiesData(rawData)
 {
-  const taxonomies = { series: {}, tags: {}, items: {} }   
+  const taxonomies = { series: {}, tags: {}, items: {}, pages: {} }   
   console.log('');
   
+  // Add pages to taxonomies
+  rawData
+    .filter(({ frontmatter }) => !(frontmatter.tags && frontmatter.series))
+    .forEach(({ relativePath, frontmatter }) => 
+    {
+      const linkUrl = '/' + pathToSlug(relativePath.replace(/\.md$/, ''))
+      taxonomies.pages[linkUrl] = linkUrl;
+    })
+
+  // Add articles to taxonomies
   rawData 
     .filter(({ frontmatter }) => frontmatter.tags || frontmatter.series)
     .forEach(({ relativePath, frontmatter }) => 
@@ -75,22 +85,27 @@ function CreateTaxonomiesData(rawData)
       // Add article to series
       if (frontmatter.series) 
       {
-        if (!taxonomies.series[frontmatter.series]) taxonomies.series[frontmatter.series] = [];
-        taxonomies.series[frontmatter.series].push(linkUrl);
-  
-        console.log(`Added to Series [${frontmatter.series}]: ${relativePath}`);
+        const seriesName = frontmatter.series.toLowerCase();
+        if (!taxonomies.series[seriesName]) taxonomies.series[seriesName] = [];
+        taxonomies.series[seriesName].push(linkUrl);
+      
+        console.log(`Added to Series [${seriesName}]: ${relativePath}`);
       }
-  
+      
       // Add article to tags
       if (frontmatter.tags) 
       {
-        frontmatter.tags.forEach((tag) => {
-          if (!taxonomies.tags[tag]) taxonomies.tags[tag] = [];
-          taxonomies.tags[tag].push(linkUrl);
-          console.log(`Added to Tag [${tag}]: ${relativePath}`);
+        frontmatter.tags.forEach((tag) => 
+        {
+          const tagName = tag.toLowerCase();
+          if (!taxonomies.tags[tagName]) taxonomies.tags[tagName] = [];
+          taxonomies.tags[tagName].push(linkUrl);
+          
+          console.log(`Added to Tag [${tagName}]: ${relativePath}`);
         });
       }
     })
+
   return taxonomies
 }
 
