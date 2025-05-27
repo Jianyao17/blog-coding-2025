@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { useData } from 'vitepress/dist/client/theme-default/composables/data'
 import { useCaseInsensitiveSearch } from '../composables/useCaseInsensitiveSearch';
 import { useArticleSorting } from '../composables/useSortingArticle';
@@ -67,9 +67,6 @@ const searchInput = ref('')
 const hasOrder = computed(() => articles.value.every(article => 'order' in article))
 const orderBy  = ref(hasOrder.value ? props.orderBy  : 'title-ascending')
 
-const cardMode = computed(() => ['grid', 'scroll'].includes(props.layout) ? 'square' : 'list')
-const count = computed(() => filteredArticles.value.length)
-
 // Filtered and sorted articles
 const filteredArticles = computed(() => 
 {  
@@ -81,6 +78,16 @@ const filteredArticles = computed(() =>
 
 const paginatedArticles = computed(() => 
   paginateItems(filteredArticles.value, props.paginate))
+
+const cardMode = computed(() => ['grid', 'scroll'].includes(props.layout) ? 'square' : 'list')
+const count = computed(() => filteredArticles.value.length)
+const placeholderCount = computed(() => 
+{
+  if (props.layout !== 'grid' || props.paginate <= 0) return 0;
+
+  const itemCount = paginatedArticles.value.length;
+  return itemCount % 4 ? 4 - (itemCount % 4) : 0;
+});
   
 </script>
 
@@ -110,6 +117,12 @@ const paginatedArticles = computed(() =>
           :isFirst="article.index == 0" :key="article.index" 
           :article="article"            :showTags="false"
           :mode="cardMode" />
+
+      <!-- Placeholder cards untuk mengisi ruang kosong -->
+      <div v-if="layout === 'grid' && paginate > 0" 
+           v-for="n in placeholderCount" 
+           :key="`placeholder-${n}`" 
+           class="card-placeholder"></div>
     </div>
     
     <PaginationControls
@@ -160,21 +173,21 @@ input, select, option {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, .5fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 12px;
 }
 
 .list {
   display: flex;
   flex-direction: column; 
-  gap: 12px;
+  row-gap: 12px;
 }
 
 .scroll {
   width: 100%;
   display: inline-flex;
   overflow-x: scroll;
-  padding: 16px 8px;
+  padding: 16px 0px;
   gap: 12px;
 
   scrollbar-width: thin;
@@ -182,15 +195,6 @@ input, select, option {
   scrollbar-color: var(--vp-c-border) var(--vp-c-bg-alt);
   scroll-snap-type: x proximity;
 
-  /* Menambahkan masking gradient */
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 5%,
-    black 95%,
-    transparent 100%
-  );
-  
   .scroll-item {
     flex: 0 0 calc((100% / 3) - 12px);
 
@@ -219,7 +223,7 @@ input, select, option {
 
 @media (min-width: 640px) {
   .grid, .list, .scroll {
-    gap: 16px;
+    row-gap: 16px;
   }
 
   .filter {

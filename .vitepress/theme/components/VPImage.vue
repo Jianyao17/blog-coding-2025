@@ -105,7 +105,9 @@ onUnmounted(() => {
 <style scoped>
 .img {
   width: inherit;
+  height: inherit;
   cursor: pointer;
   border-radius: 8px;
+  object-fit: cover;
 }
 </style>
