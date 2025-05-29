@@ -5,6 +5,7 @@ import { TaxonomiesHotUpdate } from './scripts/taxonomies.dev.js';
 import { GenerateRobotsTxt } from './scripts/generate-robots.js';
 import { CopyAssetsToBuild } from './scripts/copy-assets.js';
 import { InsertOGMetadata } from './scripts/og-metadata.js';
+import { markdownKatex } from './scripts/katex-plugin.js';
 import { configDotenv } from 'dotenv';
 
 // Load .env file
@@ -63,14 +64,16 @@ export default defineConfig({
     en: {
       label: 'English',
       lang: 'en', 
-      // other locale specific properties...
-    }
+    },
   },
 
   cleanUrls: true,  
   markdown: {
     config: (md) => 
     {
+      // Add KaTeX support for math rendering
+      md.use(markdownKatex);
+
       // Replace <img> inside markdown content with 
       // custom VPImage component
       md.use((md) => {
@@ -129,7 +132,7 @@ export default defineConfig({
 
   vite: {
     plugins: [
-      TaxonomiesHotUpdate()
+      TaxonomiesHotUpdate(),
     ]
   }
 })

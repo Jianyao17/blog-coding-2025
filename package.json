@@ -6,16 +6,17 @@
     "blog:preview": "vitepress preview"
   },
   "devDependencies": {
+    "chalk": "^5.4.1",
     "dotenv": "^16.4.7",
+    "glob": "^11.0.2",
+    "gray-matter": "^4.0.3",
     "sharp": "^0.33.5",
     "vite-plugin-run": "^0.6.1",
     "vitepress": "^1.5.0"
   },
   "dependencies": {
     "@giscus/vue": "^3.1.1",
-    "chalk": "^5.4.1",
-    "glob": "^11.0.2",
-    "gray-matter": "^4.0.3",
+    "katex": "^0.16.22",
     "mermaid": "^11.6.0",
     "panzoom": "^9.4.3",
     "viewerjs": "^1.11.7",

@@ -13,6 +13,7 @@ import VPGoogleAds from '../VPGoogleAds.vue'
 import VPImgViewer from '../VPImgViewer.vue'
 import VPImage from '../VPImage.vue'
 import VPProps from '../VPProps.vue'
+import VPLatexViewer from '../VPLatexViewer.vue'
 
 const { width: vw } = useWindowSize({
   initialWidth: 0,
@@ -37,6 +38,7 @@ const pageName = computed(() => route.path.replace(/[./]+/g, '_').replace(/_html
 
       <div>
         <VPImgViewer />
+        <VPLatexViewer />
         <VPMermaidViewer />
         <VPBackToTop :isMobile="true"/>
       </div>

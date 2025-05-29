@@ -165,3 +165,41 @@ img, video, canvas {
 .vp-doc strong:not(a strong) {
   color: var(--vp-c-brand-1);
 }
+
+/* Katex */
+
+/* Math display lebih besar */
+.math-display {
+  display: flex;
+  flex-grow: 1;
+  font-size: 1.7em;
+  margin: 8px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Inline math sedikit lebih besar */
+.katex {
+  font-size: 1.1em;
+}
+
+.katex-display {
+  margin: 8px auto !important;
+}
+
+/* Error styling */
+.math-error {
+  background: #fee;
+  color: #c33;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Responsive untuk mobile */
+@media (max-width: 768px) {
+  .math-display {
+    font-size: 1em;
+    margin: 1em 0;
+  }
+}

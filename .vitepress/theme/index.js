@@ -7,8 +7,10 @@ import VPListArticles from './components/VPListArticles.vue';
 import VPMermaid from './components/VPMermaid.vue';
 import VPImage from './components/VPImage.vue';
 
+import 'katex/dist/katex.min.css'
 import './viewer.css';
 import './style.css';
+import VPLatex from './components/VPLatex.vue';
 
 
 
@@ -21,5 +23,6 @@ export default {
     
     app.component('VPMermaid', VPMermaid);
     app.component('VPImage', VPImage);    
+    app.component('VPLatex', VPLatex);
   },
 }
